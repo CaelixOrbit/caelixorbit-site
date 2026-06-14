@@ -1,0 +1,4 @@
+[submodule "content/Today-I-Learned"]
+	path = content/Today-I-Learned
+	url = https://github.com/CaelixOrbit/Today-I-Learned.git
+	branch = main

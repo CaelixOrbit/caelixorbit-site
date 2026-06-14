@@ -1,0 +1,322 @@
+/* ====== QSL 卡片基底 ====== */
+
+.qsl-card {
+  position: relative;
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: var(--card-aspect);
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 4.5% 5.2% 5.55%;
+  --card-stars: linear-gradient(transparent, transparent);
+  background:
+    var(--card-stars),
+    linear-gradient(145deg, rgba(128, 230, 187, 0.12), transparent 34%),
+    linear-gradient(315deg, rgba(79, 147, 255, 0.16), transparent 48%),
+    var(--surface-strong);
+  box-shadow: var(--shadow);
+  container-type: inline-size;
+}
+
+/* 内嵌装饰边框 */
+.qsl-card::before {
+  position: absolute;
+  inset: 5.95% 3.75%;
+  z-index: -1;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: calc(var(--radius) - 2px);
+  pointer-events: none;
+  content: "";
+}
+
+/* 右下角装饰轨道环 */
+.qsl-card::after {
+  position: absolute;
+  right: -22%;
+  bottom: -35%;
+  z-index: -2;
+  width: 48%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(118, 220, 255, 0.18);
+  border-radius: 50%;
+  pointer-events: none;
+  content: "";
+}
+
+/* ====== QSL 正面 ====== */
+
+.qsl-card.front {
+  grid-template-rows: 1fr;
+  align-content: stretch;
+}
+
+.front-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: auto auto;
+  align-content: space-between;
+  min-width: 0;
+  gap: 2.4cqi;
+}
+
+.kicker {
+  margin: 0 0 2.4cqi;
+  color: var(--cyan);
+  font-size: 2.8cqi;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.callsign {
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  color: var(--ink);
+  font-size: 11.4cqi;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.82;
+  text-indent: -0.05em;
+}
+
+.qsl-card .tagline {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 3cqi 0 0;
+  color: var(--gold);
+  font-size: 2.92cqi;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.qsl-identity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 2.2cqi;
+  color: var(--muted);
+  font-size: 2.2cqi;
+  line-height: 1.35;
+}
+
+.qsl-identity strong {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.qsl-identity a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.qsl-identity a:hover {
+  color: var(--gold);
+}
+
+.identity-lines {
+  display: grid;
+  gap: 1.15cqi;
+  min-width: 0;
+}
+
+.identity-lines p {
+  margin: 0;
+}
+
+.crac-mark {
+  width: 8.4cqi;
+  aspect-ratio: 0.62;
+  display: block;
+}
+
+/* ====== QSL 反面 ====== */
+
+.qsl-card.back {
+  grid-template-rows: auto auto 1fr;
+  gap: 0.4cqi;
+  padding: 4.5% 5.2% calc(7.4% + 5.5cqi) 5.2%;
+}
+
+.back-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 28%);
+  align-items: center;
+  gap: 2cqi;
+  border-bottom: 1px solid rgba(247, 216, 120, 0.46);
+  padding-bottom: 0.6cqi;
+}
+
+.back-title {
+  display: grid;
+  gap: 1cqi;
+}
+
+.back-title h2 {
+  margin: 0;
+  font-size: 3.7cqi;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.to-radio-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  border: 1px solid rgba(183, 198, 216, 0.32);
+  border-radius: calc(var(--radius) - 2px);
+  color: var(--ink);
+  padding: 1.5cqi;
+  font-size: 2.5cqi;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.confirm-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.8cqi;
+  color: var(--muted);
+  font-size: 1.8cqi;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.confirm-row strong {
+  color: var(--ink);
+  letter-spacing: 0.08em;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9cqi;
+  white-space: nowrap;
+}
+
+.qso-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.25cqi;
+  align-content: start;
+}
+
+.field {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border: 1px solid rgba(183, 198, 216, 0.2);
+  border-radius: calc(var(--radius) - 2px);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 1cqi 1.35cqi;
+}
+
+.field.date,
+.field.time,
+.field.rig,
+.field.ant {
+  grid-column: span 3;
+}
+
+.field.band,
+.field.mode,
+.field.rst,
+.field.pwr,
+.field.wx,
+.field.op {
+  grid-column: span 2;
+}
+
+.field.remarks {
+  grid-column: span 10;
+}
+
+.field span {
+  display: block;
+  margin-bottom: 1.05cqi;
+  color: var(--soft);
+  font-size: 1.88cqi;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.field-value {
+  min-height: 3cqi;
+  color: var(--ink);
+  font-size: 2cqi;
+  font-weight: 850;
+  line-height: 1.15;
+}
+
+.write-line {
+  height: 1px;
+  background: rgba(248, 251, 255, 0.56);
+}
+
+.back-foot {
+  position: absolute;
+  right: 5.2%;
+  bottom: 7.4%;
+  left: 5.2%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2cqi;
+  align-items: stretch;
+  color: var(--muted);
+  font-size: 1.8cqi;
+  line-height: 1.25;
+}
+
+.back-foot > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.back-foot p {
+  margin: 0;
+}
+
+.back-foot .signature {
+  align-self: end;
+}
+
+.checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8cqi;
+  font-weight: 800;
+}
+
+.box {
+  display: inline-block;
+  width: 1.9cqi;
+  height: 1.9cqi;
+  margin-right: 0.9cqi;
+  border: 1px solid rgba(248, 251, 255, 0.72);
+  vertical-align: -1px;
+}
+
+.signature {
+  color: var(--ink);
+  font-weight: 900;
+  text-align: right;
+}
+
+.signature span {
+  display: block;
+  color: var(--gold);
+  font-size: 1.2em;
+}

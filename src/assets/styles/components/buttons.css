@@ -1,0 +1,45 @@
+.eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  border: 1px solid rgba(118, 220, 255, 0.26);
+  border-radius: 999px;
+  background: rgba(118, 220, 255, 0.08);
+  color: var(--cyan);
+  padding: 7px 10px;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(183, 198, 216, 0.26);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ink);
+  padding: 0 18px;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(118, 220, 255, 0.58);
+  background: rgba(118, 220, 255, 0.1);
+}
+
+.button-primary {
+  border-color: rgba(247, 216, 120, 0.42);
+  background: rgba(247, 216, 120, 0.11);
+  color: var(--gold);
+}
+

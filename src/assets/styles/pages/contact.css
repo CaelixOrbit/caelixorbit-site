@@ -1,0 +1,40 @@
+.contact-page {
+  display: grid;
+  gap: 28px;
+}
+
+.contact-card-stack {
+  --contact-card-gap: 28px;
+  display: grid;
+  gap: var(--contact-card-gap);
+}
+
+.qsl-card-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--contact-card-gap);
+  align-items: start;
+}
+
+.contact-card-stack .card-block,
+.contact-card-stack .identity-card,
+.contact-card-stack .qsl-card {
+  width: 100%;
+}
+
+.qsl-export-pending,
+.qsl-export-pending:hover,
+.qsl-export-pending:focus-visible {
+  border-color: rgba(183, 198, 216, 0.2);
+  background: rgba(183, 198, 216, 0.07);
+  color: var(--soft);
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
+}
+
+@media (max-width: 760px) {
+  .qsl-card-row {
+    grid-template-columns: 1fr;
+  }
+}

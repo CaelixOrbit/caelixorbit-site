@@ -1,0 +1,65 @@
+.card-flip-container {
+  perspective: 1200px;
+  width: 100%;
+}
+
+.card-flip-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--card-aspect);
+  transform-style: preserve-3d;
+  transition: transform 560ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-flip-container.flipped .card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back,
+.card-flip-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-flip-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
+.card-flip-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 14px;
+  border: 1px solid rgba(183, 198, 216, 0.16);
+  border-radius: var(--radius);
+  background: rgba(5, 16, 28, 0.42);
+  color: var(--soft);
+  padding: 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color 200ms ease,
+    color 200ms ease,
+    background 200ms ease;
+}
+
+.card-flip-control:hover,
+.card-flip-control:focus-visible {
+  border-color: rgba(118, 220, 255, 0.42);
+  background: rgba(5, 16, 28, 0.64);
+  color: var(--cyan);
+}
+
+.card-flip-control:active {
+  background: rgba(5, 16, 28, 0.78);
+}

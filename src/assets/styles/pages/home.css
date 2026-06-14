@@ -1,0 +1,211 @@
+.hero-section {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.94fr) minmax(320px, 1.06fr);
+  gap: clamp(28px, 6vw, 84px);
+  align-items: center;
+  min-height: calc(100dvh - 128px);
+  padding: 32px 0 64px;
+}
+
+.hero-copy {
+  display: grid;
+  gap: 24px;
+}
+
+.hero-copy h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(4rem, 11vw, 8.4rem);
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: 0;
+}
+
+.tagline {
+  display: inline-block;
+  color: var(--gold);
+  font-size: clamp(1.25rem, 3vw, 2.1rem);
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.hero-text {
+  max-width: 680px;
+  color: var(--muted);
+  font-size: 1.06rem;
+}
+
+.hero-visual {
+  position: relative;
+  display: grid;
+  min-height: 460px;
+  place-items: center;
+  isolation: isolate;
+}
+
+.hero-visual::before {
+  position: absolute;
+  width: min(92vw, 560px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(118, 220, 255, 0.1);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(118, 220, 255, 0.14), transparent 64%),
+    conic-gradient(from 20deg, transparent, rgba(118, 220, 255, 0.22), transparent, rgba(247, 216, 120, 0.22), transparent);
+  content: "";
+  opacity: 0.84;
+}
+
+.orbit-system {
+  position: relative;
+  width: min(86vw, 440px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  container-type: inline-size;
+}
+
+.orbit-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: visible;
+}
+
+.orbit-stroke {
+  fill: none;
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+}
+
+.orbit-cyan {
+  stroke: rgba(118, 220, 255, 0.25);
+}
+
+.orbit-gold {
+  stroke: rgba(247, 216, 120, 0.3);
+}
+
+.orbit-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.dot-gold {
+  fill: var(--gold);
+  filter: drop-shadow(0 0 12px rgba(247, 216, 120, 0.95));
+}
+
+.dot-cyan {
+  fill: var(--cyan);
+  filter: drop-shadow(0 0 12px rgba(118, 220, 255, 0.92));
+}
+
+.core {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 46%;
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(247, 216, 120, 0.34);
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 38%, rgba(255, 255, 255, 0.86), rgba(247, 216, 120, 0.66) 10%, rgba(118, 220, 255, 0.22) 32%, rgba(5, 16, 28, 0.95) 68%);
+  box-shadow:
+    inset 0 0 54px rgba(118, 220, 255, 0.18),
+    0 0 88px rgba(118, 220, 255, 0.24),
+    0 0 42px rgba(247, 216, 120, 0.2);
+  color: #ffffff;
+  container-type: inline-size;
+  text-align: center;
+}
+
+.core-secret {
+  padding: 0;
+  appearance: none;
+  cursor: default;
+  font: inherit;
+}
+
+.core-secret:focus-visible {
+  border-color: rgba(118, 220, 255, 0.48);
+  box-shadow:
+    inset 0 0 54px rgba(118, 220, 255, 0.22),
+    0 0 92px rgba(118, 220, 255, 0.32),
+    0 0 46px rgba(247, 216, 120, 0.24);
+}
+
+.core-secret:active .core-content {
+  transform: scale(0.99);
+}
+
+.core-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.core-title {
+  display: block;
+  font-size: 36cqi;
+  font-weight: 900;
+  line-height: 0.78;
+  letter-spacing: 0;
+}
+
+.core-kicker {
+  display: block;
+  margin-top: 6.8cqi;
+  color: rgba(248, 251, 255, 0.82);
+  font-size: 7cqi;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+@media (min-width: 981px) and (min-height: 680px) {
+  .home-shell .hero-section {
+    min-height: 0;
+    height: 100%;
+    gap: clamp(24px, 5vw, 72px);
+    padding: 0;
+  }
+
+  .home-shell .hero-copy {
+    align-content: center;
+    gap: clamp(12px, 2dvh, 18px);
+    min-height: 0;
+  }
+
+  .home-shell .hero-copy h1 {
+    font-size: clamp(3.8rem, 9vw, 7.2rem);
+  }
+
+  .home-shell .tagline {
+    margin: 0;
+    font-size: clamp(1.12rem, 2.4vw, 1.72rem);
+  }
+
+  .home-shell .hero-text {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .home-shell .hero-visual {
+    align-self: center;
+    min-height: 0;
+    height: 100%;
+    max-height: min(58dvh, 520px);
+  }
+
+  .home-shell .hero-visual::before {
+    width: min(44vw, 56dvh, 520px);
+  }
+
+  .home-shell .orbit-system {
+    width: min(40vw, 52dvh, 420px);
+  }
+
+}

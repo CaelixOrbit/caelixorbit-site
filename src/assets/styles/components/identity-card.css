@@ -1,0 +1,393 @@
+.identity-card,
+.note-row {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(118, 220, 255, 0.1), transparent 34%),
+    linear-gradient(315deg, rgba(247, 216, 120, 0.12), transparent 38%),
+    var(--surface-strong);
+  box-shadow: var(--shadow);
+}
+
+.identity-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.identity-card {
+  --card-stars:
+    radial-gradient(circle at 14% 28%, rgba(248, 251, 255, 0.68) 0 0.8px, transparent 1.7px),
+    radial-gradient(circle at 28% 72%, rgba(118, 220, 255, 0.54) 0 1px, transparent 2.1px),
+    radial-gradient(circle at 46% 18%, rgba(248, 251, 255, 0.46) 0 0.9px, transparent 1.9px),
+    radial-gradient(circle at 68% 34%, rgba(247, 216, 120, 0.5) 0 1.1px, transparent 2.4px),
+    radial-gradient(circle at 82% 70%, rgba(118, 220, 255, 0.44) 0 0.9px, transparent 2px),
+    radial-gradient(circle at 88% 22%, rgba(248, 251, 255, 0.15) 0 8px, transparent 18px),
+    radial-gradient(circle at 22% 84%, rgba(118, 220, 255, 0.11) 0 10px, transparent 24px);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  row-gap: 0;
+  align-content: start;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: var(--card-aspect);
+  padding: 4.5% 5.2% 5.55%;
+  background:
+    var(--card-stars),
+    linear-gradient(135deg, rgba(118, 220, 255, 0.1), transparent 34%),
+    linear-gradient(315deg, rgba(247, 216, 120, 0.12), transparent 38%),
+    var(--surface-strong);
+  container-type: inline-size;
+}
+
+.identity-card::before {
+  position: absolute;
+  inset: 5.95% 3.75%;
+  z-index: -1;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: calc(var(--radius) - 2px);
+  content: "";
+}
+
+.identity-card::after {
+  position: absolute;
+  right: -22%;
+  bottom: -35%;
+  z-index: -2;
+  width: 48%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(118, 220, 255, 0.18);
+  border-radius: 50%;
+  content: "";
+}
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3.1cqi;
+}
+
+.card-kicker {
+  color: var(--cyan);
+  font-size: 2.8cqi;
+  font-weight: 900;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.card-code {
+  border: 1px solid rgba(247, 216, 120, 0.32);
+  border-radius: 999px;
+  color: var(--gold);
+  padding: 0.6cqi 1.2cqi;
+  font-size: 2.8cqi;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.card-name {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 3.5cqi 0 0;
+  font-size: 10.3cqi;
+  font-weight: 900;
+  line-height: 0.88;
+}
+
+.card-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(118, 220, 255, 0.72), rgba(247, 216, 120, 0.72), transparent);
+}
+
+.card-details {
+  grid-column: 1;
+  grid-row: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: 24.5cqi minmax(0, 1fr);
+  align-items: baseline;
+  gap: 2.6cqi;
+  color: var(--muted);
+  font-size: 2.7cqi;
+  line-height: 1.2;
+}
+
+.detail-row strong {
+  color: var(--ink);
+  font-weight: 800;
+  font-size: inherit;
+}
+
+.identity-card.compact {
+  background:
+    var(--card-stars),
+    linear-gradient(145deg, rgba(128, 230, 187, 0.12), transparent 34%),
+    linear-gradient(315deg, rgba(79, 147, 255, 0.16), transparent 48%),
+    var(--surface-strong);
+}
+
+.identity-card.no-stars {
+  --card-stars: linear-gradient(transparent, transparent);
+}
+
+.identity-card.compact .card-name {
+  margin-top: 8.4cqi;
+  font-size: 12.1cqi;
+}
+
+.identity-card .tagline {
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 0.5cqi;
+  color: var(--gold);
+  font-size: 3.9cqi;
+  font-weight: 800;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.card-link {
+  display: inline;
+  width: fit-content;
+  color: var(--ink);
+  font-weight: 800;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.card-link:hover {
+  color: var(--gold);
+}
+
+.card-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: var(--card-aspect);
+  background:
+    /* 星光点阵 */
+    radial-gradient(circle at 12% 18%, rgba(248, 251, 255, 0.42) 0 0.55px, transparent 1.5px),
+    radial-gradient(circle at 25% 9%, rgba(118, 220, 255, 0.38) 0 0.7px, transparent 1.8px),
+    radial-gradient(circle at 38% 24%, rgba(248, 251, 255, 0.5) 0 0.65px, transparent 1.7px),
+    radial-gradient(circle at 52% 14%, rgba(247, 216, 120, 0.36) 0 0.8px, transparent 2px),
+    radial-gradient(circle at 68% 28%, rgba(248, 251, 255, 0.44) 0 0.6px, transparent 1.6px),
+    radial-gradient(circle at 78% 11%, rgba(118, 220, 255, 0.32) 0 0.55px, transparent 1.6px),
+    radial-gradient(circle at 87% 32%, rgba(248, 251, 255, 0.48) 0 0.7px, transparent 1.85px),
+    radial-gradient(circle at 7% 44%, rgba(247, 216, 120, 0.3) 0 0.65px, transparent 1.7px),
+    radial-gradient(circle at 18% 62%, rgba(118, 220, 255, 0.34) 0 0.6px, transparent 1.7px),
+    radial-gradient(circle at 33% 52%, rgba(248, 251, 255, 0.4) 0 0.55px, transparent 1.55px),
+    radial-gradient(circle at 47% 68%, rgba(118, 220, 255, 0.28) 0 0.65px, transparent 1.75px),
+    radial-gradient(circle at 62% 48%, rgba(248, 251, 255, 0.36) 0 0.5px, transparent 1.5px),
+    radial-gradient(circle at 76% 58%, rgba(247, 216, 120, 0.32) 0 0.7px, transparent 1.8px),
+    radial-gradient(circle at 85% 72%, rgba(118, 220, 255, 0.26) 0 0.55px, transparent 1.6px),
+    radial-gradient(circle at 92% 44%, rgba(248, 251, 255, 0.34) 0 0.6px, transparent 1.65px),
+    /* 柔光基底 */
+    linear-gradient(155deg, rgba(118, 220, 255, 0.07), transparent 38%),
+    linear-gradient(315deg, rgba(247, 216, 120, 0.09), transparent 42%),
+    linear-gradient(135deg, rgba(118, 220, 255, 0.1), transparent 34%),
+    linear-gradient(315deg, rgba(247, 216, 120, 0.12), transparent 38%),
+    var(--surface-strong);
+}
+
+.card-back-starry {
+  background:
+    linear-gradient(155deg, rgba(118, 220, 255, 0.07), transparent 38%),
+    linear-gradient(315deg, rgba(247, 216, 120, 0.09), transparent 42%),
+    linear-gradient(135deg, rgba(118, 220, 255, 0.1), transparent 34%),
+    linear-gradient(315deg, rgba(247, 216, 120, 0.12), transparent 38%),
+    #0b192a;
+}
+
+.card-back-star-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.card-back-star-field .star-soft {
+  opacity: 0.9;
+}
+
+.card-back-star-field .star-glow {
+  opacity: 0.72;
+}
+
+/* ====== 卡片反面 ====== */
+
+/* 封面反面不需要内边框 */
+.identity-card.card-back::before,
+.card-back::before,
+.card-back.card-back-compact::before {
+  content: none;
+}
+
+/* 右下角装饰轨道环 */
+.card-back::after {
+  position: absolute;
+  right: -27%;
+  bottom: -38%;
+  z-index: 0;
+  width: 53%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(118, 220, 255, 0.14);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 54% 46%, rgba(118, 220, 255, 0.06), transparent 68%),
+    conic-gradient(from 140deg, transparent, rgba(118, 220, 255, 0.08), transparent, rgba(247, 216, 120, 0.08), transparent);
+  pointer-events: none;
+  content: "";
+}
+
+.card-back-rule {
+  position: absolute;
+  inset: 9.2% 6.4% auto 6.4%;
+  z-index: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(118, 220, 255, 0.48), rgba(247, 216, 120, 0.38), transparent);
+  pointer-events: none;
+}
+
+.card-back-orbit {
+  position: absolute;
+  left: -19%;
+  bottom: -22%;
+  z-index: 0;
+  width: 40%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(247, 216, 120, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.card-back-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 8%;
+  gap: 1.2cqi;
+}
+
+.card-back-monogram {
+  display: block;
+  color: var(--gold);
+  font-size: 15cqi;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 0.82;
+}
+
+.card-back-tagline {
+  margin: 0;
+  color: var(--cyan);
+  font-size: 3.1cqi;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.card-back-divider {
+  width: 42%;
+  max-width: 180px;
+  height: 1px;
+  margin: 0.6cqi 0;
+  background: linear-gradient(90deg, transparent, rgba(247, 216, 120, 0.48), transparent);
+}
+
+.card-back-categories {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.9cqi;
+  margin: 0;
+  color: var(--muted);
+  font-size: 2.1cqi;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.card-back-callsign {
+  border: 1px solid rgba(247, 216, 120, 0.26);
+  border-radius: 999px;
+  color: var(--gold);
+  padding: 0.1cqi 1cqi;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.card-back-url {
+  margin: 0.4cqi 0 0;
+  color: var(--soft);
+  font-size: 2cqi;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.card-back-url:hover {
+  color: var(--gold);
+}
+
+/* ====== Compact 卡片反面变体 ====== */
+
+.card-back-compact {
+  /* 覆盖基底渐变：融入 compact 正面的绿 / 蓝色调 */
+  background:
+    radial-gradient(circle at 15% 22%, rgba(248, 251, 255, 0.38) 0 0.5px, transparent 1.4px),
+    radial-gradient(circle at 28% 11%, rgba(128, 230, 187, 0.28) 0 0.65px, transparent 1.7px),
+    radial-gradient(circle at 44% 28%, rgba(248, 251, 255, 0.44) 0 0.6px, transparent 1.6px),
+    radial-gradient(circle at 58% 16%, rgba(79, 147, 255, 0.32) 0 0.7px, transparent 1.8px),
+    radial-gradient(circle at 72% 25%, rgba(248, 251, 255, 0.4) 0 0.55px, transparent 1.55px),
+    radial-gradient(circle at 84% 14%, rgba(128, 230, 187, 0.22) 0 0.6px, transparent 1.6px),
+    radial-gradient(circle at 8% 48%, rgba(79, 147, 255, 0.26) 0 0.6px, transparent 1.65px),
+    radial-gradient(circle at 22% 58%, rgba(248, 251, 255, 0.36) 0 0.55px, transparent 1.55px),
+    radial-gradient(circle at 36% 46%, rgba(128, 230, 187, 0.2) 0 0.5px, transparent 1.5px),
+    radial-gradient(circle at 52% 66%, rgba(79, 147, 255, 0.24) 0 0.6px, transparent 1.7px),
+    radial-gradient(circle at 68% 52%, rgba(248, 251, 255, 0.32) 0 0.5px, transparent 1.5px),
+    radial-gradient(circle at 82% 62%, rgba(128, 230, 187, 0.18) 0 0.55px, transparent 1.6px),
+    radial-gradient(circle at 91% 48%, rgba(248, 251, 255, 0.3) 0 0.55px, transparent 1.55px),
+    linear-gradient(155deg, rgba(128, 230, 187, 0.08), transparent 38%),
+    linear-gradient(315deg, rgba(79, 147, 255, 0.1), transparent 42%),
+    linear-gradient(135deg, rgba(128, 230, 187, 0.06), transparent 34%),
+    linear-gradient(315deg, rgba(79, 147, 255, 0.08), transparent 38%),
+    var(--surface-strong);
+}
+
+/* compact 反面轨道环：绿色调 */
+.card-back-compact::after {
+  border-color: rgba(128, 230, 187, 0.12);
+  background:
+    radial-gradient(circle at 54% 46%, rgba(128, 230, 187, 0.05), transparent 68%),
+    conic-gradient(from 140deg, transparent, rgba(79, 147, 255, 0.07), transparent, rgba(128, 230, 187, 0.07), transparent);
+}
+
+/* compact 反面左上小轨道环：蓝色调 */
+.card-back-compact .card-back-orbit {
+  border-color: rgba(79, 147, 255, 0.09);
+}
+
+/* compact 反面内部装饰线 */
+.card-back-compact .card-back-rule {
+  background: linear-gradient(90deg, transparent, rgba(128, 230, 187, 0.38), rgba(79, 147, 255, 0.32), transparent);
+}
+
