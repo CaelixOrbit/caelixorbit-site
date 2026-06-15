@@ -27,6 +27,8 @@ interface CategoryOption {
 const route = useRoute()
 const router = useRouter()
 
+const PAGE_SIZE = 10
+
 const notes = ref<NoteItem[]>([])
 const isLoading = ref(true)
 const errorMessage = ref('')
@@ -145,6 +147,100 @@ const filteredNotes = computed(() => {
   })
 })
 
+const currentPage = computed(() => {
+  const raw = route.query.page
+  if (typeof raw !== 'string') return 1
+  const n = parseInt(raw, 10)
+  if (!Number.isFinite(n) || n < 1) return 1
+  return n
+})
+
+const totalPages = computed(() => Math.max(1, Math.ceil(filteredNotes.value.length / PAGE_SIZE)))
+
+const validatedPage = computed(() => Math.min(currentPage.value, totalPages.value))
+
+const pagedNotes = computed(() => {
+  const start = (validatedPage.value - 1) * PAGE_SIZE
+  return filteredNotes.value.slice(start, start + PAGE_SIZE)
+})
+
+interface PageLink {
+  label: string
+  page: number
+  current: boolean
+  disabled: boolean
+  kind: 'prev' | 'next' | 'page' | 'gap'
+}
+
+const paginationLinks = computed<PageLink[]>(() => {
+  const total = totalPages.value
+  const current = validatedPage.value
+  const links: PageLink[] = []
+
+  links.push({
+    label: '上一页',
+    page: current - 1,
+    current: false,
+    disabled: current <= 1,
+    kind: 'prev',
+  })
+
+  const maxVisible = 7
+  let startPage: number
+  let endPage: number
+
+  if (total <= maxVisible) {
+    startPage = 1
+    endPage = total
+  } else {
+    const half = Math.floor(maxVisible / 2)
+    if (current <= half + 1) {
+      startPage = 1
+      endPage = maxVisible - 1
+    } else if (current >= total - half) {
+      startPage = total - maxVisible + 2
+      endPage = total
+    } else {
+      startPage = current - half + 1
+      endPage = current + half - 1
+    }
+  }
+
+  if (startPage > 1) {
+    links.push({ label: '1', page: 1, current: false, disabled: false, kind: 'page' })
+    if (startPage > 2) {
+      links.push({ label: '…', page: 0, current: false, disabled: true, kind: 'gap' })
+    }
+  }
+
+  for (let p = startPage; p <= endPage; p++) {
+    links.push({
+      label: String(p),
+      page: p,
+      current: p === current,
+      disabled: false,
+      kind: 'page',
+    })
+  }
+
+  if (endPage < total) {
+    if (endPage < total - 1) {
+      links.push({ label: '…', page: 0, current: false, disabled: true, kind: 'gap' })
+    }
+    links.push({ label: String(total), page: total, current: false, disabled: false, kind: 'page' })
+  }
+
+  links.push({
+    label: '下一页',
+    page: current + 1,
+    current: false,
+    disabled: current >= total,
+    kind: 'next',
+  })
+
+  return links
+})
+
 const recentNotes = computed(() => notes.value.slice(0, 4))
 
 async function setCategory(category: string) {
@@ -152,6 +248,19 @@ async function setCategory(category: string) {
     path: '/notes',
     query: category ? { category } : {},
   })
+}
+
+async function goToPage(page: number) {
+  const total = totalPages.value
+  const clamped = Math.max(1, Math.min(page, total))
+  const query: Record<string, string> = {}
+  if (activeCategory.value) {
+    query.category = activeCategory.value
+  }
+  if (clamped > 1) {
+    query.page = String(clamped)
+  }
+  await router.push({ path: '/notes', query })
 }
 
 function expandCategory(category: string) {
@@ -202,6 +311,16 @@ watch(
     }
   },
   { immediate: true },
+)
+
+watch(
+  () => currentPage.value,
+  (page) => {
+    const total = totalPages.value
+    if (page > total) {
+      goToPage(total)
+    }
+  },
 )
 
 onMounted(async () => {
@@ -306,7 +425,7 @@ onMounted(async () => {
         <p v-else-if="filteredNotes.length === 0" class="state-text">当前分类还没有笔记。</p>
 
         <RouterLink
-          v-for="note in filteredNotes"
+          v-for="note in pagedNotes"
           v-else
           :key="note.slug"
           class="note-row"
@@ -319,6 +438,31 @@ onMounted(async () => {
           <time :datetime="note.updatedAt">{{ formatDate(note.updatedAt) }}</time>
         </RouterLink>
       </div>
+
+      <nav
+        v-if="totalPages > 1"
+        class="pagination"
+        aria-label="分页导航"
+      >
+        <button
+          v-for="link in paginationLinks"
+          :key="`${link.kind}-${link.page}`"
+          :class="[
+            'pagination-item',
+            `pagination-${link.kind}`,
+            { 'pagination-current': link.current, 'pagination-disabled': link.disabled },
+          ]"
+          :disabled="link.disabled"
+          :aria-current="link.current ? 'page' : undefined"
+          :aria-label="link.kind === 'prev' ? '上一页' : link.kind === 'next' ? '下一页' : link.kind === 'gap' ? '更多页码' : `第 ${link.page} 页`"
+          type="button"
+          @click="link.kind !== 'gap' && goToPage(link.page)"
+        >
+          <span v-if="link.kind === 'prev'" class="pagination-chevron pagination-chevron-left" aria-hidden="true"></span>
+          <span v-else-if="link.kind === 'next'" class="pagination-chevron pagination-chevron-right" aria-hidden="true"></span>
+          <span v-else>{{ link.label }}</span>
+        </button>
+      </nav>
     </div>
   </section>
 </template>

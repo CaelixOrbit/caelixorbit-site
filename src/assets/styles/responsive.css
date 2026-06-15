@@ -76,6 +76,19 @@
     display: none;
   }
 
+  .pagination {
+    gap: 4px;
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+
+  .pagination-item {
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 0.82rem;
+    padding: 0 8px;
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -386,3 +386,93 @@
 .note-row {
   padding: 18px 20px;
 }
+
+/* ── Pagination ── */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(183, 198, 216, 0.1);
+}
+
+.pagination-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  border: 1px solid rgba(183, 198, 216, 0.16);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  padding: 0 10px;
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+  user-select: none;
+}
+
+.pagination-item:hover:not(.pagination-disabled):not(.pagination-current):not(.pagination-gap) {
+  border-color: rgba(118, 220, 255, 0.42);
+  background: rgba(118, 220, 255, 0.08);
+  color: var(--cyan);
+  transform: translateY(-1px);
+}
+
+.pagination-current {
+  border-color: rgba(247, 216, 120, 0.5);
+  background: rgba(247, 216, 120, 0.11);
+  color: var(--gold);
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination-disabled {
+  opacity: 0.36;
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination-gap {
+  border-color: transparent;
+  background: transparent;
+  color: var(--soft);
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination-prev,
+.pagination-next {
+  min-width: 40px;
+  padding: 0;
+}
+
+.pagination-chevron {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+}
+
+.pagination-chevron-left {
+  transform: rotate(135deg);
+  margin-left: 2px;
+}
+
+.pagination-chevron-right {
+  transform: rotate(-45deg);
+  margin-right: 2px;
+}
