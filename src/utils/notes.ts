@@ -14,7 +14,7 @@ export async function fetchNotes(): Promise<NoteItem[]> {
       })
       .then((notes) =>
         [...notes].sort((left: NoteItem, right: NoteItem) =>
-          right.updatedAt.localeCompare(left.updatedAt),
+          left.title.localeCompare(right.title, 'zh-CN', { numeric: true }),
         ),
       )
   }
